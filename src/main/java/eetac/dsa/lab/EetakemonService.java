@@ -1,6 +1,8 @@
 package eetac.dsa.lab;
 
-import eetac.dsa.lab.entity.Eetakemon;
+import eetac.dsa.lab.entity.User;
+import eetac.dsa.lab.entity.User;
+
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -9,23 +11,23 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by Home on 15/04/2017.
+ * Created by Carlos on 19/04/2017.
  */
 @Path("")
 public class EetakemonService {
 
-    private static Map<Integer,Eetakemon> eetakemonList = new HashMap<Integer, Eetakemon>();
+    private static Map<Integer,User> eetakemonList = new HashMap<Integer, User>();
 
     @POST
     @Path("/add")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response addEetakemon(Eetakemon e) {
+    public Response addEetakemon(User u) {
         try {
-            e.insert();
-            return Response.status(201).entity("Eetakemon added successfully: " + e).build();
+            u.insert();
+            return Response.status(201).entity("User added successfully: " + u).build();
         } catch (Exception e1) {
             e1.printStackTrace();
-            return Response.status(409).entity("Eetakemon already exists!").build();
+            return Response.status(409).entity("User already exists!").build();
         }
           /*
            {
@@ -39,9 +41,9 @@ public class EetakemonService {
     @GET
     @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Eetakemon> listEetakemon() throws Exception {
-        Eetakemon e = new Eetakemon();
-        List<Eetakemon> list = e.findAll();
+    public List<User> listEetakemon() throws Exception {
+        User u = new User();
+        List<User> list = u.findAll();
         return list;
     }
 
@@ -49,35 +51,35 @@ public class EetakemonService {
     @GET
     @Path("/name/{name}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Eetakemon> searchByName (@PathParam("name") String name) throws Exception {
-        Eetakemon e = new Eetakemon(null,name,null);
-        List<Eetakemon> list = e.selectByName();
+    public List<User> searchByName (@PathParam("name") String name) throws Exception {
+        User u = new User(null,name,null);
+        List<User> list = u.selectByName();
         return list;
     }
 
     @GET
     @Path("/{id}/delete")
     public Response delById(@PathParam("id") int id) {
-        Eetakemon e = new Eetakemon(id,null,null);
+        User u = new User(id,null,null);
         try {
-            e.delete();
-            return Response.status(200).entity("Eetakemon deleted successfully.").build();
+            u.delete();
+            return Response.status(200).entity("User deleted successfully.").build();
         } catch (Exception e1) {
             e1.printStackTrace();
-            return Response.status(202).entity("Eetakemon does not exists.").build();
+            return Response.status(202).entity("User does not exists.").build();
         }
     }
 
     @POST
     @Path("/modify")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response updateEetakemon(Eetakemon e) {
+    public Response updateEetakemon(User u) {
         try {
-            e.update();
-            return Response.status(201).entity("Eetakemon added successfully: " + e).build();
+            u.update();
+            return Response.status(201).entity("User added successfully: " + u).build();
         } catch (Exception e1) {
             e1.printStackTrace();
-            return Response.status(409).entity("Eetakemon already exists!").build();
+            return Response.status(409).entity("User already exists!").build();
         }
     }
     /*

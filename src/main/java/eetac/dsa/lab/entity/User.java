@@ -2,22 +2,22 @@ package eetac.dsa.lab.entity;
 import eetac.dsa.lab.Dao;
 
 /**
- * Created by Home on 15/04/2017.
+ * Created by Carlos on 19/04/2017.
  */
-public class Eetakemon extends Dao {
+public class User extends Dao {
     private Integer id;
     private String name;
-    private Integer level;
+    private String password;
 
-    public Eetakemon()
+    public User()
     {
     }
 
-    public Eetakemon (Integer id, String name, Integer level)
+    public User (Integer id, String name, String mail)
     {
         this.id = id;
         this.name = name;
-        this.level = level;
+        this.password = password;
     }
 
     public String getName()
@@ -25,9 +25,9 @@ public class Eetakemon extends Dao {
         return name;
     }
 
-    public Integer getLevel()
+    public String getPassword()
     {
-        return level;
+        return password;
     }
 
     public Integer getId()
@@ -45,14 +45,14 @@ public class Eetakemon extends Dao {
         this.id = id;
     }
 
-    public void setLevel(Integer level)
+    public void setPassword(String password)
     {
-        this.level = level;
+        this.password = password;
     }
 
     @Override
     public String toString() {
-        return "Eetakemon [id=" + id + ", name=" + name + ", level=" + level + "]";
+        return "User [id=" + id + ", name=" + name + ", password=" + password + "]";
     }
 
     @Override
