@@ -13,7 +13,7 @@ public class User extends Dao {
     {
     }
 
-    public User (Integer id, String name, String mail)
+    public User (Integer id, String name, String password)
     {
         this.id = id;
         this.name = name;

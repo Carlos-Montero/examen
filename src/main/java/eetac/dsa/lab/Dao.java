@@ -91,7 +91,6 @@ public abstract class Dao<E> {
         }
     }
 
-//    protected void insert() throws InvocationTargetException, IllegalAccessException, NoSuchMethodException, SQLException {
     protected void insert() throws Exception {
         StringBuffer buffer = new StringBuffer("INSERT INTO " + this.getClass().getSimpleName().toLowerCase() + "(");
         StringBuffer buffer2 = new StringBuffer("VALUES (");
@@ -190,8 +189,6 @@ public abstract class Dao<E> {
         buffer.append(this.getPrimaryKey()).append("=?");
         Method metodo = this.getClass().getMethod(this.getPKMethod());
         Object result = metodo.invoke(this,null);
-        //if(result.getClass().getName() == "java.lang.String") buffer.append("'" + result + "'");
-        //else buffer.append(result);
         Connection con=createConnection();
         System.out.println(buffer);
         PreparedStatement preparedStatement = con.prepareStatement(buffer.toString());
@@ -199,12 +196,6 @@ public abstract class Dao<E> {
         ResultSet resultado = preparedStatement.executeQuery();
         ResultSetMetaData resultSetMetaData = resultado.getMetaData();
         List<Object> lista = result(resultado,resultSetMetaData);
-        /*while ( resultado.next() ) {
-            Class classToLoad = this.getClass();
-            Object newObject = classToLoad.newInstance();
-            setFieldsFromResultSet(resultado, resultSetMetaData, newObject);
-            lista.add(newObject);
-        }*/
         preparedStatement.close();
         closeConnection(con);
         return lista;
